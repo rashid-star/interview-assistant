@@ -5,3 +5,5 @@ sentence-transformers
 scikit-learn
 requests
 pydantic
+groq
+python-dotenv
