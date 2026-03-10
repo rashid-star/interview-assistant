@@ -141,3 +141,16 @@ def chat(request: ChatRequest):
         message=request.message,
         answer=answer,
     )
+
+@app.post("/generate-question", response_model=GenerateQuestionResponse)
+def generate_question(request: GenerateQuestionRequest):
+    """
+    Generate a new interview question using Groq.
+    """
+    q = generate_interview_question(request.domain, request.difficulty)
+
+    return GenerateQuestionResponse(
+        domain=request.domain,
+        difficulty=request.difficulty,
+        question=q,
+    )
