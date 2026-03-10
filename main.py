@@ -117,21 +117,6 @@ def evaluate(request: EvaluateRequest):
         follow_up_question=follow_up_question,
     )
 
-
-@app.post("/chat", response_model=ChatResponse)
-def chat(request: ChatRequest):
-    """
-    Concept-learning chat endpoint powered by Groq LLM.
-    """
-    answer = get_concept_answer(request.domain, request.message)
-
-    return ChatResponse(
-        domain=request.domain,
-        message=request.message,
-        answer=answer,
-    )
-
-
 @app.post("/chat", response_model=ChatResponse)
 def chat(request: ChatRequest):
     try:
@@ -146,3 +131,13 @@ def chat(request: ChatRequest):
     except Exception as e:
         print("CHAT ERROR:", str(e))
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/chat", response_model=ChatResponse)
+def chat(request: ChatRequest):
+    answer = get_concept_answer(request.domain, request.message)
+
+    return ChatResponse(
+        domain=request.domain,
+        message=request.message,
+        answer=answer,
+    )
