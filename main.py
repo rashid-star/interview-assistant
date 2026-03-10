@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 from src.questions import get_domains, get_questions, get_ideal_answer
 from src.evaluator import evaluate_answer
+from fastapi import HTTPException
 from src.llm_groq import (
     get_concept_answer,
     generate_interview_question,
@@ -131,14 +132,17 @@ def chat(request: ChatRequest):
     )
 
 
-@app.post("/generate-question", response_model=GenerateQuestionResponse)
-def generate_question(request: GenerateQuestionRequest):
-    """
-    Generate a new interview question using Groq.
-    """
-    q = generate_interview_question(request.domain, request.difficulty)
-    return GenerateQuestionResponse(
-        domain=request.domain,
-        difficulty=request.difficulty,
-        question=q,
-    )
+@app.post("/chat", response_model=ChatResponse)
+def chat(request: ChatRequest):
+    try:
+        answer = get_concept_answer(request.domain, request.message)
+
+        return ChatResponse(
+            domain=request.domain,
+            message=request.message,
+            answer=answer,
+        )
+
+    except Exception as e:
+        print("CHAT ERROR:", str(e))
+        raise HTTPException(status_code=500, detail=str(e))
