@@ -2,7 +2,7 @@
 
 An AI‑powered web app to **learn concepts** and **practice interview answers** across multiple domains like Machine Learning, Deep Learning, NLP, Data Science, Data Analytics, and Web Development.
 
-Built with **FastAPI**, **Streamlit**, **sentence‑transformers**, **scikit‑learn**, and **Groq** LLMs.
+Built with **FastAPI**, **Streamlit**, **scikit‑learn**, and **Groq** LLMs.
 
 ---
 
@@ -15,7 +15,7 @@ Built with **FastAPI**, **Streamlit**, **sentence‑transformers**, **scikit‑l
   - **Practice answers (Evaluation)**  
     - Pick or generate interview questions.  
     - Write your own answer and get:
-      - Similarity‑based **score (0–100)** using sentence embeddings + cosine similarity.  
+      - Similarity‑based **score (0–100)** using TF‑IDF + cosine similarity.  
       - Local **rating + basic feedback**.  
       - Groq‑powered **coach feedback**, improved answer, and follow‑up question.
 
@@ -42,13 +42,12 @@ Built with **FastAPI**, **Streamlit**, **sentence‑transformers**, **scikit‑l
   - `GET /domains` – list available domains.
   - `GET /questions?domain=...` – questions for a domain.
   - `POST /chat` – Groq LLM for concept Q&A.
-  - `POST /evaluate` – embeddings + cosine similarity + Groq coaching.
+  - `POST /evaluate` – TF‑IDF + cosine similarity + Groq coaching.
   - `POST /generate-question` – Groq LLM generates new interview questions.
 
 - **Core logic (`src/`)**
   - `questions.py` – domain‑wise question bank + ideal answers.
-  - `embeddings.py` – SentenceTransformer (`all-MiniLM-L6-v2`) embeddings.
-  - `evaluator.py` – cosine similarity scoring, labels, and base feedback.
+  - `evaluator.py` – TF‑IDF cosine similarity scoring, labels, and base feedback.
   - `llm_groq.py` – Groq client for chat answers, coaching, and question generation.
 
 ---
