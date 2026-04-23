@@ -54,7 +54,6 @@ def fetch_questions(domain: str):
     resp.raise_for_status()
     return resp.json().get("questions", [])
 
-
 def call_evaluate(domain: str, question: str, answer: str):
     payload = {
         "domain": domain,
@@ -65,7 +64,6 @@ def call_evaluate(domain: str, question: str, answer: str):
     resp.raise_for_status()
     return resp.json()
 
-
 def call_chat(domain: str, message: str):
     payload = {
         "domain": domain,
@@ -75,13 +73,11 @@ def call_chat(domain: str, message: str):
     resp.raise_for_status()
     return resp.json()
 
-
 def call_generate_question(domain: str, difficulty: str):
     payload = {"domain": domain, "difficulty": difficulty}
     resp = requests.post(f"{API_URL}/generate-question", json=payload)
     resp.raise_for_status()
     return resp.json()
-
 
 # ===== Step 1 – Select mode =====
 st.markdown("### 1️⃣ Choose how you want to practice")

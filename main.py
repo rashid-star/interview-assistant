@@ -10,15 +10,12 @@ from src.llm_groq import (
     generate_practice_coaching,
 )
 
-
 app = FastAPI(title="AI Interview Assistant")
-
 
 class EvaluateRequest(BaseModel):
     domain: str
     question: str
     answer: str
-
 
 class EvaluateResponse(BaseModel):
     domain: str
@@ -42,7 +39,6 @@ class ChatResponse(BaseModel):
     message: str
     answer: str
 
-
 class GenerateQuestionRequest(BaseModel):
     domain: str
     difficulty: str = "medium"  # easy | medium | hard
@@ -52,7 +48,6 @@ class GenerateQuestionResponse(BaseModel):
     domain: str
     difficulty: str
     question: str
-
 
 @app.get("/domains")
 def list_domains():
@@ -71,7 +66,6 @@ def list_questions(domain: str):
         "domain": domain,
         "questions": get_questions(domain),
     }
-
 
 @app.post("/evaluate", response_model=EvaluateResponse)
 def evaluate(request: EvaluateRequest):
