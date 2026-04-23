@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-API_URL = "https://interview-assistant-production-0ce6.up.railway.app"
+API_URL = "https://interview-assistant-rh8i.onrender.com"
 
 st.set_page_config(
     page_title="AI Interview Assistant Hub",
